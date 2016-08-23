@@ -1,0 +1,13 @@
+.post
+  &.on-index
+    +span-columns(6)
+    +omega(2n)
+    margin-bottom: $dm*2
+    +media($mobile)
+      +span-columns(12)
+      +omega
+
+.new-post-form
+  input[type="submit"]
+    margin-top: 0
+    float: right

@@ -1,0 +1,70 @@
+- @my_conversations.each do |conversation|  
+  - conversation.participants.each do |participant|
+    - if participant.user.avatar != nil
+      css:
+        .user_#{participant.user.id} {
+          background: url(/images/#{participant.user.id}/#{participant.user.avatar}) center center no-repeat;
+          background-size: cover;
+        }
+    - else
+      css:
+        .user_#{participant.user.id} {
+          background: url(#{participant.user.gravatarURL}) center center no-repeat;
+          background-size: cover;
+        }
+  
+
+h1 Meine Nachrichten
+hr
+#conversations data-id=(env['warden'].user.id)
+  #conversations-meta-menu
+    a.button.icon#new-message href="#"
+      i.fa.fa-envelope
+      span Neue Konversation starten
+    a.button.icon#show-menu-mobile href="#"
+      i.fa.fa-arrow-circle-o-left
+      span Postfächer
+  #conversations-menu
+    ul
+      li 
+        a#show-inbox href="#" Inbox
+      li Sent
+      li Thrash
+
+  #conversations-list
+    ul.conversations
+      - @my_conversations.each do |conversation|
+        li.conversations-list-item data-id=(conversation.id) class="conversation_#{conversation.id}" class=(conversation.messages.any?{|message| message.status == :unread && message.sender != @sessionUser.id} ? 'new-message': '')
+          .conversation-inner-wrapper
+            i.fa.fa-circle-o.conversation-status.green
+            - conversation.participants.each do |participant|
+              - unless participant.user == @sessionUser
+                b = participant.user.forename
+            .conversation-timestamp = conversation.update_at.strftime("%d.%m.%Y - %H:%M:%S")
+
+  #messages data-id=@my_conversations.first.id
+    #message-spinner
+    == slim :"message/conversation", :locals => {conversation: @my_conversations.first}
+
+  #message-answer-box
+    form#message-answer action="" method="post" 
+      textarea.new_message name="message" rows="5"
+      input.button.icon#message-answer-link type="submit" 
+      input type="hidden" value=env['warden'].user.id name="senderId"
+    a.button#delete-conversation-link href="#" Delete this Conversation
+
+#overlay
+  #overlay-inner
+    #close-overlay
+      .i.fa.fa-times.fa-2x
+    #new-message-reciever
+      select
+        option value="" Select User
+        - @user.friends.each do |friend|
+          option value="#{friend.id}" = friend.forename
+    #new-message-text
+      textarea rows="10"
+    #new-message-button
+      a.button.icon#send-message href="#" 
+        i.fa.fa-reply
+        span Absenden

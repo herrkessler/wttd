@@ -1,0 +1,261 @@
+#conversations
+  width: 100%
+  +display(flex)
+  +flex(1 1)
+  +flex-flow(row wrap)
+  +justify-content(flex-start)
+  +align-content(flex-start)
+  +align-items(stretch)
+  height: 80vh
+  overflow-y: hidden
+  +media($mobile)
+    position: relative
+    width: 300%
+    display: block
+    padding-top: 50px
+    +transition(transform 0.3s ease-out)
+    +transform(translateX(-33.33%))
+    #conversations-menu, #conversations-list, #messages
+      width: 33.33%
+      float: left
+      border: 0!important
+      padding: 0!important
+      height: auto
+  &.mobile-active
+    +transform(translateX(-66.66%))
+    #conversations-meta-menu
+      left: 66.66%
+  &.mobile-menu-active
+    +transform(translateX(0))
+    #conversations-meta-menu
+      left: 0%
+
+#conversations-menu
+  +flex(0 0 15%)
+  padding-right: $dp/2
+  +media($tablet)
+    // display: none
+
+#conversations-list
+  +flex(0 0 25%)
+  +media($tablet)
+    +flex(0 0 30%)
+  +media($mobile)
+    +flex(0 0 100%)
+    padding: 0
+    border-right: 0px!important
+
+#conversations-list, #conversations-menu
+  border-right: 1px solid white
+
+#conversations-menu, #conversations-list, #messages
+  +calc(height, "100% - 26px")
+  overflow-y: scroll
+
+#conversations-meta-menu
+  +flex(0 0 100%)
+  margin: $dm/2 0
+  +media($mobile)
+    display: block
+    width: 33.33%
+    position: fixed
+    left: 33.33%
+    top: 0
+
+#messages
+  position: relative
+  +flex(0 0 60%)
+  min-height: 400px
+  padding: 0 0 0 $dp/2
+  +media($tablet)
+    +flex(0 0 70%)
+  +media($mobile)
+    height: 80% !important
+    overflow-y: scroll
+    min-height: 0 !important
+
+.messages-list
+  +span-columns(12)
+  +omega
+
+.messages-list-item
+  margin-bottom: $dm
+  position: relative
+  +span-columns(12)
+  +omega
+  &:last-child
+    margin-bottom: 140px
+    +media($mobile)
+      margin-bottom: 60px
+
+.message-header
+  margin-bottom: $dm/2
+  position: relative
+  +span-columns(1)
+  +media($mobile)
+    +span-columns(2)
+
+.message-title
+  font-weight: bold
+
+#message-nav
+  margin: $dm 0
+  float: left
+  width: 100%
+  a
+    &:first-child
+      float: left
+    &:last-child
+      float: right
+
+#show-menu-mobile
+  display: none
+  +media($tablet)
+    display: inline-block
+
+.conversations-list-item
+  position: relative
+  +transition(background 0.3s ease-out)
+  &:nth-child(odd)
+    background: lighten($bg-color, 5%)
+  &:nth-child(even)
+    background: lighten($bg-color, 2.5%)
+  &:hover
+    background: darken($bg-color, 5%)
+    .delete-conversation-link
+      display: block
+  &.selected
+    background: lighten($bg-color, 10%)
+
+.conversation-inner-wrapper
+  position: relative
+  padding: $dp/2 0
+  margin: 0 $dp/2
+  cursor: pointer
+
+.conversation-status
+  position: absolute
+  top: $dp/2
+  right: $dp/2
+  color: $green
+  display: none
+  .new-message &
+    display: block
+
+.conversation-timestamp, .message-timestamp
+  font-size: 14px
+
+.message-timestamp
+  color: silver
+
+#new-message
+  float: right
+
+#message-answer
+  width: 100%
+  +media($mobile)
+    height: 50px
+    &:focus
+      height: 100px
+      outline: none
+
+#message-spinner
+  opacity: 0
+  +size(30px)
+  +total-center
+  background-color: white
+  +animation(rotateplane 1.2s infinite ease-in-out)
+  +transition(opacity 0.3s ease-out)
+  &.loading
+    opacity: 1
+
++keyframes(rotateplane)
+  0%
+    +transform(perspective(120px) rotateX(0deg) rotateY(0deg))
+  50%
+    +transform(perspective(120px) rotateX(-180.1deg) rotateY(0deg))
+  100%
+    +transform(perspective(120px) rotateX(-180deg) rotateY(-179.9deg))
+
+
+#message-answer-box
+  position: absolute
+  bottom: 0
+  right: 0
+  +calc(width, "60% - 2px")
+  background: $bg-color
+  padding: 0 $dp/2
+  +media($tablet)
+    +calc(width, "70% - 4px")
+  +media($mobile)
+    width: 33.33%
+    display: none
+    padding: 0
+    height: 108px
+
+.message-user
+  float: left
+  border-radius: 50%
+  +size(30px)
+
+.message-content
+  +span-columns(11)
+  +omega()
+  +media($mobile)
+    +span-columns(10)
+
+.new_message
+  width: 100%
+  margin-bottom: $dm
+  +media($mobile)
+    margin-bottom: $dm/4
+
+.message-text
+  margin: $dm/2 0 $dm 0
+
+// new Message
+// ---------------------------------
+
+#overlay
+  display: none
+  background: rgba(black, 0.8)
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  &.active
+    display: block
+    z-index: 1
+
+#close-overlay
+  position: absolute
+  right: 0
+  top: -10px
+  cursor: pointer
+  +transition(color 0.2s ease-out)
+  &:hover
+    color: $dark-red
+
+#overlay-inner
+  +total-center
+  +media($mobile)
+    width: 90%
+
+#new-message-text
+  textarea
+    max-width: 100%
+    width: 400px
+    margin: $dm 0
+
+// delete conversation
+// --------------------------------
+
+#delete-conversation-link
+  position: absolute
+  bottom: 0
+  right: 10px
+  color: $dark-red
+  border-color: $dark-red
+
+

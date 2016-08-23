@@ -1,0 +1,22 @@
+#user-profile
+
+  .user-avatar
+    - if @user.avatar != 'avatar.png'
+      img src='/images/#{@user.id}/#{@user.avatar}'
+    - else
+      img src="#{@user.gravatarURL}"
+
+  .user-info.padded
+    h1 
+      = @user.forename
+      - if @user == @sessionUser
+        a href="/users/#{@user.id}/edit"
+          i.fa.fa-gear.edit-profile-link
+
+- if @sessionUser.admin == true
+  br
+  br
+  .admin-bar
+    form action="/users/#{@user.id}" method="POST"
+      input type="hidden" name="_method" value="DELETE"
+      input.button.admin type="submit" value="Delete THIS User"

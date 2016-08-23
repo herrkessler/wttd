@@ -1,0 +1,91 @@
+$map: (facebook: #3B5998, twitter: #55ACEE, google: #D73D32, github: silver)
+
+%button
+  display: inline-block
+  border-radius: 3px
+  padding: 6px 16px
+  background: none
+  border: 2px solid $dark-grey
+  color: $dark-grey
+  text-decoration: none
+  margin-right: 10px
+  min-width: 120px
+  text-align: center
+  +transition(border 0.3s ease-out, color 0.3s ease-out)
+  outline: 0
+  font-size: 16px
+  font-weight: 700
+  cursor: pointer
+  font-weight: normal
+  -webkit-font-smoothing: antialiased
+  &:hover
+    color: white
+    background: $dark-grey
+
+.button
+  @extend %button
+  &.reversed, &.active
+    background: $dark-grey
+    color: white
+    border-color: $dark-grey
+  &.reversed
+    &:hover
+      background: none
+      color: white
+      border-color: white
+  &.disabled, &:disabled
+    cursor: default
+    border-color: $grey
+    color: $grey
+    &:hover
+      border-color: $grey
+      color: $grey
+      background: none
+    &.to-login
+      cursor: pointer
+  &.signup, &.login
+    font-weight: bold
+  &.highlight
+    color: $highlight
+    border-color: $highlight
+    &:hover
+      color: white!important
+      background: $highlight
+    &.reversed
+      color: white!important
+      border-color: $highlight
+      background: $highlight
+      &:hover
+        color: white
+  &.active
+    &.favourite
+      i
+        color: $red
+    &.checkin
+      cursor: default
+      i
+        color: $green
+  &.admin
+    border-color: $admin
+    color: $admin
+  &.icon
+    span
+      margin-left: $dm/4
+  &.avatar
+    span
+      padding: $dm/4 0 0 $dm/4
+  &.full
+    display: block
+    width: 100%
+    padding: 10px 0
+  &.omniauth
+    +span-columns(4 of 8)
+    +omega(2n)
+    margin-bottom: $dm/2
+  @each $profile, $color in $map
+    &.#{$profile}
+      color: $color
+      border-color: $color
+      &:hover
+        background: $color
+        color: white

@@ -1,0 +1,94 @@
+- unless env['warden'].authenticated?
+  #index-gallery
+    ul
+      - @venues.first(8).each do |venue|
+        li.gradient
+          a href="/venue/#{venue.id}"
+            img src="/images/venue/#{venue.id}/#{venue.image_name}-square.jpg"
+  #hello
+    h1 Whattodotoday - Was machen wir heute?
+    h2 
+      | Stet clita kasd gubergren, no sea takimata sanctus est
+      br
+      | dolore magna aliquyam erat, sed diam voluptua.
+    br
+    p 
+      | Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.!
+      br
+      br
+      a.button.login href="/login" login
+      | or 
+      a.button.highlight.signup href="/users/new" sign up
+      br
+      br
+      |  or take the 
+      a href="/tour" Tour
+
+- else 
+  
+  #index-gallery
+    ul
+      - @venues.first(6).each do |venue|
+        li.gradient
+          a href="/venue/#{venue.id}"
+            img src="/images/venue/#{venue.id}/#{venue.image_name}-square.jpg"
+  
+  section.padded.section--hello
+    h1
+      | Hallo   
+      = env['warden'].user.forename
+    h3 Willkommen zurück bei whattodotoday.de
+    p 
+    .border
+
+  #dashboard
+    section.padded.section--checkins
+      - if @checkins.length > 0 
+        h3 Deine letzten Check-Ins
+        ul.row
+        - @checkins.each_with_index do |checkin, index| 
+          li.user-check-item
+            == slim :"venue/venue", :locals => {venue: checkin, index: index}
+      - else
+        ul.row
+          li.card.single
+            a href="/venues"
+              .card-avatar
+                .empty-square
+              .card-content
+                .card-name Noch keine Check-Ins?
+                .card-geolocation
+                  span Na los, such Dir eine Sehenswürdigkeit in Deiner Nähe und check ein.
+                  span
+
+    section.padded.section--trips
+      h3 Deine geplanten Trips
+      ul.row
+        li.card.single
+          a href="/venues"
+            .card-avatar
+              .empty-square
+            .card-content
+              .card-name Noch keine geplanten Trips?
+              .card-geolocation
+                span Na los, such Dir eine Sehenswürdigkeit und plane einen Trip.
+                span
+
+    section.padded.section--favourites
+      h3 Dein Merkzettel
+      - if env['warden'].user.venues.length > 4
+        ul.row
+          - env['warden'].user.venues.first(4).each_with_index do |venue, index|
+            li.user-fav-item
+              == slim :"venue/venue", :locals => {venue: venue, index: index}
+        a.button href="#" Alle Favouriten anzeigen
+
+      - if env['warden'].user.venues.length == 0
+        p Du hast noch keine Favouriten gespeichert
+        a.button href="/venues" Sehenswürdigkeiten
+
+      - else
+        ul.row
+          - env['warden'].user.venues.each_with_index do |venue, index|
+            li.user-fav-item
+              == slim :"venue/venue", :locals => {venue: venue, index: index}

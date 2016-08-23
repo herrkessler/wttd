@@ -1,0 +1,70 @@
+.card
+  position: relative
+  margin-bottom: 4%
+  a
+    display: block
+    text-decoration: none
+  &.venue
+    +span-columns(6)
+    +omega(2n)
+    border-bottom: 1px solid #F0F0F0
+    margin-bottom: 4%
+    padding-bottom: 4%
+    +media($mobile)
+      +span-columns(12)
+      +omega
+  &.category
+    +span-columns(2)
+    +media($mobile)
+      +span-columns(4)
+      +omega(3n)
+  &.single
+    +span-columns(12)
+    +omega()
+    border-bottom: 1px solid #F0F0F0
+    margin-bottom: 4%
+    padding-bottom: 4%
+
+.card-avatar
+  +span-columns(4)
+  position: relative
+  background: $light-grey
+  @extend %walden
+
+.card-content
+  +span-columns(8)
+  padding: 0 0 0 10px
+  &.icon
+    +span-columns(12)
+    text-align: center
+
+.card-name
+  font-family: 'Merriweather', sans-serif
+  font-size: 20px
+
+.card-geolocation
+  span
+    &:first-child
+      font-weight: 700
+    &:last-child
+      margin-left: 5px
+
+.card-icon
+  position: relative
+  +size(50px)
+  margin: 0 auto
+  border: 1px solid black
+  border-radius: 50%
+  i 
+    +total-center
+    font-size: 5rem
+  &:before
+    content: ""
+    display: block
+    padding-top: 100%
+
+.list
+  +row
+  &:not(:last-child)
+    border-bottom: 1px solid #F0F0F0
+    margin-bottom: $dm

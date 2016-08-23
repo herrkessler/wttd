@@ -1,0 +1,80 @@
+nav#main-navigation
+  .container
+    .inner
+      ul.main-navigation-list
+        li.main-navigation-list-item.logo
+          a href="/" whattodotoday
+        - if env['warden'].authenticated?
+          li.main-navigation-list-item.sites
+            a href="/venues" Sehenswürdigkeiten
+          li.main-navigation-list-item.categories
+            a href="/categories" Kategorien
+          li.main-navigation-list-item.blog
+            a href="/blog" Blog
+          li.main-navigation-list-item.tour
+            a href="/tour" Tour
+          li.main-navigation-list-item.logout
+            a.highlight.js-logout href="/logout" Log Out
+          li.main-navigation-list-item.profile
+            a href="/users/#{env['warden'].user.id}"
+              img.user-small-avatar src= "#{env['warden'].user.gravatarURL}"
+            a href="/users/#{env['warden'].user.id}" Mein Profil
+        - else
+          li.main-navigation-list-item.sites
+            a href="/venues" Sehenswürdigkeiten
+          li.main-navigation-list-item.categories
+            a href="/categories" Kategorien
+          li.main-navigation-list-item.blog
+            a href="/blog" Blog
+          li.main-navigation-list-item.tour
+            a class="simptip-position-right simptip-fade simptip-multiline simptip-info" data-tooltip="Lerne whattodotoday.de und seine Features kennen..." href="/tour" Tour
+          li.main-navigation-list-item.signup
+            a.highlight href="/users/new" Sign Up
+          li.main-navigation-list-item.login
+            a.highlight href="/login" Log In
+
+      #mobile-navigation-icon
+        span
+        span
+        span
+
+      - if env['warden'].authenticated?
+        #mobile-profile-link
+          a href="/users/#{env['warden'].user.id}"
+            img src= "#{env['warden'].user.gravatarURL}"
+
+      #mobile-navigation
+        ul.mobile-navigation-list
+          - if env['warden'].authenticated?
+            li.mobile-navigation-list-item.profile
+              a.button.avatar.reversed href="/users/#{env['warden'].user.id}" 
+                img.user-button-avatar src= "#{env['warden'].user.gravatarURL}"
+                span = env['warden'].user.forename
+            li.mobile-navigation-list-item.sites
+              a.button.reversed href="/venues" Sehenswürdigkeiten
+            li.mobile-navigation-list-item.categories
+              a.button.reversed href="/categories" Kategorien
+            li.mobile-navigation-list-item.blog
+              a.button.reversed href="/blog" Blog
+            li.mobile-navigation-list-item.tour
+              a.button.reversed href="/tour" Tour
+            li.mobile-navigation-list-item.logout
+              a.button.highlight.js-logout href="/logout" Log Out
+          - else
+            li.mobile-navigation-list-item.signup
+              a.button.highlight.reversed href="/users/new" Sign Up
+            li.mobile-navigation-list-item.login
+              a.button.reversed href="/login" Log In
+            li.mobile-navigation-list-item.sites
+              a.button.reversed href="/venues" Sehenswürdigkeiten
+            li.mobile-navigation-list-item.categories
+              a.button.reversed href="/categories" Kategorien
+            li.mobile-navigation-list-item.blog
+              a.button.reversed href="/blog" Blog
+            li.mobile-navigation-list-item.tour
+              a.button.reversed href="/tour" Tour
+
+  a#up href="#main-navigation" 
+    | «
+
+== slim :"admin-navigation"

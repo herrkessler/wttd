@@ -1,0 +1,136 @@
+.friendship-to-accept-counter, .mail-counter
+  position: absolute
+  top: -4px
+  right: -14px
+  background: $highlight
+  color: white
+  +size($dm)
+  text-align: center
+  line-height: $dm
+  font-size: 14px
+  border-radius: 50%
+  display: inline-block
+  vertical-align: super
+  +media($tablet)
+    +size($dm/2)
+    font-size: 0
+    right: -4px
+    top: -2px
+
+.user-avatar
+  +span-columns(3)
+  +media($mobile)
+    +span-columns(12)
+
+.user-info
+  +span-columns(12)
+  +omega
+
+.edit-profile-link
+  color: $highlight
+  font-size: 18px!important
+  vertical-align: middle
+  margin-left: $dm
+
+// Friendships
+// ----------------------------------------------
+
+.friendship-requests, #friendships, #user-profile
+  position: relative
+  +span-columns(12)
+  +omega
+  margin-bottom: $dm
+
+.friendships
+  +span-columns(12)
+
+#friendships-to-accept, #mail
+  i
+    font-size: 26px
+    color: white
+
+.accept-friendship, .delete-friendship
+  margin-right: $dm/2
+
+.accept-friendship
+  color: darken($green, 10%)
+
+.delete-friendship
+  color: darken($red, 10%)
+
+#friendship-nav
+  position: absolute
+  top: 10px
+  right: 0
+  span
+    font-size: 14px
+  +media($mobile)
+    position: inherit
+    right: inherit
+    top: inherit
+    margin: $dm/4 0
+
+// Edit
+// ----------------------------------------------
+
+.edit-avatar
+  +span-columns(6)
+  +media($tablet)
+    +span-columns(4)
+  +media($mobile)
+    +span-columns(12)
+    +omega
+    margin-bottom: $dm*2
+
+.edit-data
+  +span-columns(6)
+  +omega
+  +media($tablet)
+    +span-columns(8)
+  +media($mobile)
+    +span-columns(12)
+
+.edit-form, .new-post-form
+  width: 100%
+  label
+    display: inline-block
+    width: 30%
+    +media($mobile)
+      display: block
+      width: 100%
+    &.top
+      vertical-align: top
+  input[type="text"], input[type="password"], input[type="email"], textarea, input[type="file"]
+    +appearance(none)
+    color: $dark-grey
+    border: 1px solid $blue
+    outline: 0
+    width: 70%
+    padding: 8px
+    font-size: 14px
+    margin: $dm/2 0
+    +media($mobile)
+      display: block
+      width: 100%
+  .button
+    margin-top: $dm*2
+
+// New user
+// ----------------------------------------------
+
+.new-user-message
+  color: white
+  width: 100%
+  padding: $dp
+  border: 1px solid $highlight
+  border-radius: 3px
+  margin-bottom: $dm
+  div
+    text-align: center
+    &:first-child
+      margin-bottom: $dm
+      color: $highlight
+    &:last-child
+      line-height: 1.6
+      font-weight: bold
+      font-size: 14px

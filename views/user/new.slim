@@ -1,0 +1,13 @@
+#signup-form
+  form action="/users" method="POST"
+    fieldset
+      == slim :"user/new-form"
+    input.button.full.highlight.signup type="submit" value="Sign Up"
+
+  hr
+  p Or easily signup with: 
+  .omniauth-variants
+    a.button.facebook.omniauth href="" Facebook
+    a.button.twitter.omniauth href="" Twitter
+    a.button.github.omniauth href="" Github
+    a.button.google.omniauth href="" Google+

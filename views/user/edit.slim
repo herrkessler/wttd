@@ -1,0 +1,25 @@
+.user-avatar
+  - if @user.avatar != 'avatar.png'
+    img src='/images/#{@user.id}/#{@user.avatar}'
+  - else
+    img src="#{@user.gravatarURL}"
+
+.user-info.padded
+  h1 Edit Your Data*
+
+/ .edit-avatar.padded
+/   form.edit-form action="/users/#{@user.id}/avatar" method="POST" enctype="multipart/form-data"
+/     == slim :"user/avatar-form"
+/     input.button type="submit" value="Upload new Avatar"
+
+.edit-data.padded
+  form.edit-form action="/users/#{@user.id}" method="POST"
+    == slim :"user/update-form"
+    input type="hidden" name="_method" value="PUT"
+    input.button type="submit" value="Update your Data"
+  br
+  br
+  p 
+    |* change your avatar at 
+    a href="http://gravatar.com"
+      | Gravatar

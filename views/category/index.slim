@@ -1,0 +1,9 @@
+.venue-avatar.gradient
+  picture
+    source media=("(min-width: 800px)") srcset="/images/venue/1/altenberger-dom-tv.jpg" 
+    source media=("(min-width: 500px)") srcset="/images/venue/1/altenberger-dom-square.jpg" 
+    img alt="" srcset="/images/venue/1/altenberger-dom-square.jpg"
+
+ul.categories-list.padded
+  - @categories.each_with_index do |category, index|
+    == slim :"category/category", :locals => {category: category, index: index}

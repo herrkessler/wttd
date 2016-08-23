@@ -1,0 +1,8 @@
+ul.messages-list
+  - conversation.messages.each do |message|
+    li.messages-list-item
+      .message-header
+        .message-user class="user_#{message.sender}" 
+      .message-content
+        .message-date.message-timestamp = message.created_at.strftime("%H:%M:%S")
+        .message-text = message.content

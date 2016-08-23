@@ -1,0 +1,150 @@
+javascript:
+  var request = new XMLHttpRequest();
+  request.open('GET', 'https://api.instagram.com/v1/locations/#{@venue.instagram}/media/recent?access_token=974282.1677ed0.eb8980a62f344e02a26d503aa4dbbfab', true);
+
+  request.onload = function() {
+    if (this.status >= 200 && this.status < 400) {
+      var resp = this.response;
+      console.log(resp);
+    } else {
+      console.log('Error, allthough we reached the Server');
+    }
+  };
+
+  request.onerror = function() {
+    console.log('Error');
+  };
+
+  request.send();
+
+
+#venue-profile data-lat="#{@venue.latitude}" data-lng="#{@venue.longitude}" data-instagram="#{@venue.instagram}"
+  #venue-description
+
+    #venue-gallery
+      #venue-main-image.gradient
+        #venue-meta
+          - unless @venue.likes.empty?
+            #venue-likes.pill
+              i.fa.fa-heart.fa-fw
+              span= @venue.likes.length
+          - unless @venue.checkin.empty?
+            #venue-checks.pill
+              i.fa.fa-check.fa-fw
+              span= @venue.checkin.length
+        picture
+          / source media=("(min-width: 700px)") srcset="/images/venue/#{@venue.id}/#{@venue.image_name}-tv.jpg"
+          source media=("(min-width: 1500px)") srcset="/images/venue/#{@venue.id}/#{@venue.image_name}-square.jpg"
+          img alt="" srcset="/images/venue/#{@venue.id}/#{@venue.image_name}-square.jpg" width="600" height="600"
+      #googlemap
+        a href="http://maps.google.com/?q=#{@venue.street}, #{@venue.zip}, #{@venue.town}" target="_blank"
+          img src="https://maps.googleapis.com/maps/api/staticmap?center=#{@venue.latitude},#{@venue.longitude}&zoom=15&size=600x600&maptype=terrain&markers=|#{@venue.latitude},#{@venue.longitude}&key=AIzaSyBpjJmjgXOosUduR6jUHEpJ2381aWdyMRw" width="600" height="600"
+
+    #venue-info.padded
+      h1 = @venue.title
+      h2 = @venue.synopsis
+      br
+      - if @sessionUser
+        - if @sessionUser.checkin.include?(@venue.id.to_s)
+          a.button.icon.checkin.js-checkin.active href="#"
+            i.fa.fa-check.fa-fw
+            span Checked In
+        - else
+          a.button.icon.checkin.js-checkin href="/checkin/#{@venue.id}/add"
+            i.fa.fa-check.fa-fw
+            span Check In
+      - else
+        a.button.icon.checkin.js-checkin.disabled.to-login class="simptip-position-top simptip-fade simptip-multiline simptip-info" data-tooltip="Einloggen oder registrieren um dieses Feature zu nutzen" href="/login"
+          i.fa.fa-check.fa-fw
+          span Check In
+      - if @sessionUser
+        - if @sessionUser.venues.include?(@venue)
+          a.button.icon.favourite.active.js-favourite href="/venues/#{@venue.id}/delete"
+            i.fa.fa-fw.fa-heart
+            span Gemerket
+        - else
+          a.button.icon.favourite.js-favourite href="/venues/#{@venue.id}/add"
+            i.fa.fa-fw.fa-heart
+            span Merken
+      - else
+        a.button.icon.favourite.js-favourite.disabled.to-login  class="simptip-position-top simptip-fade simptip-multiline simptip-info" data-tooltip="Einloggen oder registrieren um dieses Feature zu nutzen" href="/login"
+          i.fa.fa-fw.fa-heart
+          span Merken
+      br
+      br
+      br
+      p = @venue.description
+      br
+      br
+      p
+        span Bei Instagram anschauen:
+        a href="https://www.instagram.com/explore/locations/#{@venue.instagram}/" target="_blank"
+          i.fa.fa-instagram
+      .border
+      p Adresse:
+      p = @venue.street
+      p = @venue.zip
+      p = @venue.town
+      p.js-calculated-distance
+      br
+      a.button.icon href="http://maps.google.com/?q=#{@venue.street}, #{@venue.zip}, #{@venue.town}" target="_blank"
+        i.fa.fa-fw.fa-map-marker
+        span Map
+      br
+      br
+      p
+        a href="#{@venue.url}" = @venue.url
+      .border
+
+    - unless @checkins.empty?
+      #venue-activity-feed.padded
+        h3 Check-Ins (#{@venue.checkin.length})
+        br
+        ul
+          - @checkins.each do |checkinuser|
+            li
+              img.friend-avatar src="#{checkinuser.gravatarURL}"
+        .border
+
+    #venue-related-heading.padded
+      h3 In der Nähe
+      br
+
+    section#venue-related
+      ul#venue-related-list
+        - @nearby_venues.each do |nearby_venue|
+          li.venue-related-list-item
+            a href="/venue/#{nearby_venue.id}"
+              picture
+                source media=("(min-width: 800px)") srcset="/images/venue/#{nearby_venue.id}/#{nearby_venue.image_name}-square.jpg"
+                source media=("(min-width: 500px)") srcset="/images/venue/#{nearby_venue.id}/#{nearby_venue.image_name}-square.jpg"
+                img alt="" srcset="/images/venue/#{nearby_venue.id}/#{nearby_venue.image_name}-square.jpg"
+              .venue-related-title
+                p = nearby_venue.title
+      br
+      br
+
+    section#venue-related-nav.padded
+      a.button href="#" Mehr anzeigen
+      .border
+
+    section#venue-category
+      ul#venue-category-list.padded
+        - @venue.tags.each do |tag|
+          li.venue-category-list-item
+            a href="/venues/#{tag}"
+              .venue-category-item
+                i class="maki-icon #{tag}"
+    #venue-related-nav
+      a.button href="/categories" Alle Kategorien
+
+
+
+- if @sessionUser
+  - if env['warden'].user.admin == true
+    br
+    br
+    .admin-bar
+      form action="/venues/#{@venue.id}" method="POST"
+        input type="hidden" name="_method" value="DELETE"
+        input.button.admin type="submit" value="Delete THIS venue"

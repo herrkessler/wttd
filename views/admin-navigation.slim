@@ -1,0 +1,18 @@
+- if env['warden'].authenticated?
+  - if env['warden'].user.admin == true
+    nav#admin-navigation
+      .container
+        .inner
+          ul
+            li 
+              b admin area
+            li
+              a.icon href="/dashboard" dashboard
+            li
+              a href="/users" users
+            li
+              a href="/sites" sites
+            li
+              a href="/sites/new" new site
+            li
+              a href="/blog/new" new post

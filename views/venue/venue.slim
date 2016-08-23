@@ -1,0 +1,15 @@
+li.card.venue data-lat="#{venue.latitude}" data-lng="#{venue.longitude}" data-dist=""
+  a href="/venue/#{venue.id}"
+    .card-avatar
+      picture
+        source media=("(min-width: 700px)") srcset="/images/venue/#{venue.id}/#{venue.image_name}-square.jpg" 
+        source media=("(min-width: 500px)") srcset="/images/venue/#{venue.id}/#{venue.image_name}-square.jpg" 
+        img alt="" srcset="/images/venue/#{venue.id}/#{venue.image_name}-square.jpg"
+    .card-content
+      .card-name 
+        = index+1
+        | . 
+        = venue.title
+      .card-geolocation 
+        span = venue.town 
+        span.js-calculated-distance

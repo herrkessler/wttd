@@ -1,0 +1,37 @@
+.pagination
+  +span-columns(12)
+  +omega()
+  text-align: center
+  margin: $dm 0
+  .next_page, .previous_page
+    &.disabled
+      color: grey
+      border-color: grey
+  .next_page
+    display: block
+    float: right
+  .previous_page
+    display: block
+    float: left
+  .current
+    background: black
+    color: white
+    +size(18px)
+    text-align: center
+    border-radius: 50%
+    display: inline-block
+    font-style: normal
+    font-weight: bold
+    font-size: 14px
+    line-height: 18px
+
+.top-pagination
+  +media($mobile)
+    display: none
+  .next_page, .previous_page
+    color: white
+    text-decoration: none
+
+.bottom-pagination
+  .next_page, .previous_page
+    @extend %button

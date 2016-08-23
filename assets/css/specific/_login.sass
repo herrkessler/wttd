@@ -1,0 +1,41 @@
+#login-form, #signup-form
+  +horizontal-center
+  width: 280px
+  margin: $dm*4 0 $dm*2 0
+  +media($mobile)
+    margin: 0
+    padding: $dp 0 $dp*2 0
+  label
+    display: block
+    font-size: 14px
+    font-weight: bold
+    +media($mobile)
+      display: none
+  input[type="text"], input[type="password"], input[type="email"]
+    +appearance(none)
+    color: $highlight
+    outline: 0
+    width: 280px
+    padding: 8px
+    font-size: 20px
+    margin: $dm/2 0
+    +placeholder
+      color: white
+      font-size: 14px
+      top: 2px
+      position: relative
+      font-weight: normal
+    &.required
+      +placeholder
+        font-style: italic
+    +media($mobile)
+      +placeholder
+        color: grey
+
+#signup-form
+  hr
+    margin: $dm*2 0
+  p
+    font-size: 14px
+    font-weight: bold
+    margin-bottom: $dm/2

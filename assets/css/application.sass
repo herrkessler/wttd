@@ -1,0 +1,108 @@
+@import bourbon
+@import grid/grid-settings
+@import neat
+
+@import settings/foundation
+@import settings/mixins
+@import settings/color
+@import settings/variables
+@import settings/form
+@import settings/button
+@import settings/flash
+@import settings/simptip
+@import settings/pill
+@import settings/cssgram/cssgram
+
+@import specific/user
+@import specific/venue
+@import specific/post
+@import specific/nav
+@import specific/messages
+@import specific/map
+@import specific/login
+@import specific/tour
+@import specific/logo
+@import specific/maki
+@import specific/index
+
+@import elements/card
+@import elements/pagination
+
+@import admin/admin
+
+@import url(https://fonts.googleapis.com/css?family=Merriweather:400,700|Merriweather+Sans:400.700|Lusitana:400,700)
+
+
+// Test Styles
+// ------------------------------------
+
+html, body
+  width: 100%
+  min-height: 100vh
+
+html
+  font-size: 10px
+
+body
+  color: #333
+  overflow-x: hidden
+
+.wrapper
+  display: flex
+  align-items: stretch
+  min-height: 100vh
+  +media($tablet)
+    flex-direction: column
+
+h1
+  font-size: 4rem
+  font-weight: 700
+  +media($mobile)
+    font-size: 3rem
+
+h2
+  font-family: 'Merriweather', serif
+  font-size: 1em
+  font-style: italic
+  font-weight: 400
+  line-height: 1.6em
+  margin-bottom: $dm
+  +media($mobile)
+    font-size: 1.6rem
+
+h3
+  font-size: 1.8rem
+
+h1, h3
+  font-family: 'Lusitana', serif
+
+p, a
+  font-size: 17px
+  line-height: 1.6
+  font-family: 'Source Sans Pro', sans-serif
+
+section
+  float: left
+  width: 100%
+
+.padded
+  padding: 0 $dp
+
+a
+  &:visited, &:link
+  color: #333
+  text-decoration: underline
+
+.container
+  position: relative
+  +outer-container
+  margin-left: 0
+
+main
+  margin-bottom: $dm*2
+  width: 75%
+  +media($tablet)
+    width: 100%
+
+#hello
+  @extend .padded

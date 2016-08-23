@@ -1,0 +1,136 @@
+#venue-profile
+  position: relative
+  +span-columns(12)
+  +omega
+  margin-bottom: $dm
+
+.venues-list-name
+  padding: $dm
+  h2
+    border-bottom: 1px solid #F0F0F0
+    margin-bottom: 4%
+    padding: 4% 0
+
+#venue-description
+  +span-columns(12)
+  margin-bottom: $dm
+
+#venue-gallery, #venue-info, #venue-related, #venue-category
+  +span-columns(12)
+  margin-bottom: $dm
+
+#venue-hero-image
+  display: block
+  width: 100%
+  max-width: 100%
+
+#venue-main-image, #googlemap
+  display: inline-block
+  width: 50%
+  background: silver
+  img
+    display: block
+  +media($mobile)
+    display: block
+    width: 100%
+
+#googlemap
+  +media($mobile)
+    display: none
+
+.venue-category-list-item
+  display: inline-block
+
+.venue-category-item
+  position: relative
+  display: inline-block
+  +size(40px)
+  border: 1px solid black
+  border-radius: 50%
+  margin-right: 10px
+  i
+    +total-center
+    font-size: 5rem
+  &:before
+    content: ""
+    display: block
+    padding-top: 100%
+
+.venue-gallery-list
+  +span-columns(12)
+  +omega
+
+.venue-gallery-list-item
+  +span-columns(3)
+  +omega(4n)
+  margin-bottom: $dm/2
+  border: 1px solid transparent
+  cursor: venuenter
+  +transition(border-color 0.3s ease-out)
+  img
+    display: block
+  &.selected
+    border: 1px solid white
+
+#venue-related-nav
+  +span-columns(12)
+  text-align: center
+
+#venue-activity-feed
+  li
+    display: inline-block
+    margin-right: 10px
+
+.friend-avatar
+  +size(50px)
+  border-radius: 50%
+
+.venue-related-list-item
+  position: relative
+  float: left
+  width: 25%
+  border: 1px solid white
+  @extend %_1977
+  +media($mobile)
+    width: 50%
+  img
+    display: block
+
+.gradient
+  position: relative
+  @extend %brooklyn
+  img
+    display: block
+
+.border
+  width: 80%
+  margin: 40px 0 40px 10%
+  height: 1px
+  background: silver
+
+.venue-related-title
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
+  padding: 8px
+  background: rgba(black, 0.5)
+  p
+    +ellipsis
+    text-align: center
+    color: white
+
+.instagram-feed-item
+  position: relative
+  float: left
+  width: 33%
+  border: 1px solid white
+  a, img
+    display: block
+
+#venue-meta
+  position: absolute
+  right: 0px
+  bottom: 10px
+  > div
+    margin-right: 10px

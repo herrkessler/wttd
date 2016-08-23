@@ -1,0 +1,14 @@
+/ .venue-avatar.gradient
+/   picture
+/     source media=("(min-width: 800px)") srcset="/images/venue/#{@venues.first.id}/#{@venues.first.image_name}-tv.jpg" 
+/     source media=("(min-width: 500px)") srcset="/images/venue/#{@venues.first.id}/#{@venues.first.image_name}-square.jpg" 
+/     img alt="" srcset="/images/venue/#{@venues.first.id}/#{@venues.first.image_name}-square.jpg"
+.venues-list-name
+  h1 Bergisches Land
+  h2 Sehenswürdigkeiten
+ul.categories-list.padded.list
+  - @categories.each_with_index do |category, index|
+    == slim :"category/category", :locals => {category: category, index: index}
+ul.venues-list.padded.list
+  - @venues.each_with_index do |venue, index|
+    == slim :"venue/venue", :locals => {venue: venue, index: index}
